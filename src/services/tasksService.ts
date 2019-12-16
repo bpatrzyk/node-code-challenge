@@ -8,10 +8,10 @@ export async function createTask(newTask: ITask) {
   return Tasks.create(newTask);
 }
 
-export async function updateTask() {
-
+export async function updateTask(taskId: string, updatedTask: ITask) {
+  return Tasks.findByIdAndUpdate(taskId, updatedTask, { new: true });
 }
 
 export async function deleteTask(taskId: string) {
-  return Tasks.deleteOne({ _id: taskId });
+  return Tasks.findByIdAndDelete(taskId);
 }

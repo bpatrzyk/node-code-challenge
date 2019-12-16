@@ -16,7 +16,11 @@ export async function createTask(req: Request, res: Response) {
 }
 
 export async function updateTask(req: Request, res: Response) {
-
+  const taskId = req.params.taskId;
+  const updatedTaskDTO = req.body as NewTaskDTO;
+  const updatedTask = toTask(updatedTaskDTO);
+  const task = await Service.updateTask(taskId, updatedTask);
+  res.send(toTaskDTO(task));
 }
 
 export async function deleteTask(req: Request, res: Response) {
