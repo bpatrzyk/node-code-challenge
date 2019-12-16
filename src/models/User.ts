@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
+import bcrypt from 'bcrypt';
 
 export interface IUser extends Document {
   _id: string;
@@ -19,6 +20,12 @@ const userSchema = new mongoose.Schema({
     unique: true
   },
   password: Schema.Types.String
+});
+
+// hash user password before saving into database
+userSchema.pre<IUser>('save', function(next){
+  this.password = bcrypt.hashSync(this.password, 10);
+  next();
 });
 
 const Users = mongoose.model<IUser>('Users', userSchema);

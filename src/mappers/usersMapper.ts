@@ -1,9 +1,10 @@
 import { IUser } from '../models/User';
-import { NewUserDTO, UserDTO } from '../dtos/userDTOs';
+import { NewUserDTO, TokenDTO, UserDTO } from '../dtos/userDTOs';
 
 export function toUserDTOs(users: IUser[]) {
   return users.map(user => toUserDTO(user));
 }
+
 
 export function toUserDTO(user: IUser) {
   return {
@@ -18,4 +19,10 @@ export function toUser(newUser: NewUserDTO) {
     email: newUser.email,
     password: newUser.password,
   } as IUser;
+}
+
+export function toTokenDTO(token: string) {
+  return {
+    token
+  } as TokenDTO;
 }
