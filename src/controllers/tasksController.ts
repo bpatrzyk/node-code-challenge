@@ -20,5 +20,7 @@ export async function updateTask(req: Request, res: Response) {
 }
 
 export async function deleteTask(req: Request, res: Response) {
-
+  const taskId = req.params.taskId;
+  await Service.deleteTask(taskId);
+  res.send();
 }
